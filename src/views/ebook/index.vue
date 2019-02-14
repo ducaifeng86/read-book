@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<ebook-reader></ebook-reader>
+		sdf
 	</div>
 </template>
 
