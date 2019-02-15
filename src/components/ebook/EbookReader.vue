@@ -10,7 +10,9 @@
 	global.epub = Epub
 	export default{
 		computed:{
-			...mapGetters(['fileName'])
+			...mapGetters([
+				'fileName',
+			'menuVisible'])
 		},
 		mounted(){
 			const fileName = this.$route.params.fileName.split('|').join('/');
@@ -57,7 +59,7 @@
 				}
 			},
 			toggleTitleAndMenu(){
-				
+				this.$store.dispatch('setMenuVisible',!this.menuVisible);
 			}
 		}
 	}
