@@ -12,7 +12,7 @@
 		mixins:[ebookMixin],
 		mounted(){
 			const fileName = this.$route.params.fileName.split('|').join('/');
-			this.$store.dispatch('setFileName',fileName).then(()=>{
+			this.setFileName(fileName).then(()=>{
 				this.initEpub()
 			});
 		},
@@ -57,10 +57,10 @@
 				}
 			},
 			toggleTitleAndMenu(){
-				this.$store.dispatch('setMenuVisible',!this.menuVisible);
+				this.setMenuVisible(!this.menuVisible);
 			},
 			hideTitleAndMenu(){
-				this.$store.dispatch('setMenuVisible',false);
+				this.setMenuVisible(false);
 			}
 		}
 	}
