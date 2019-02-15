@@ -5,15 +5,11 @@
 </template>
 
 <script>
-	import {mapGetters} from 'vuex'
+	import {ebookMixin} from '../../utils/mixin'
 	import Epub from 'epubjs'
 	global.epub = Epub
 	export default{
-		computed:{
-			...mapGetters([
-				'fileName',
-			'menuVisible'])
-		},
+		mixins:[ebookMixin],
 		mounted(){
 			const fileName = this.$route.params.fileName.split('|').join('/');
 			this.$store.dispatch('setFileName',fileName).then(()=>{
