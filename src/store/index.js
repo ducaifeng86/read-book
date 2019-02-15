@@ -8,5 +8,5 @@ export default new Vuex.Store({
 	modules:{
 		book
 	},
-	 getters
+	getters
 })

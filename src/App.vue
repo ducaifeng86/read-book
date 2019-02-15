@@ -4,7 +4,12 @@
   </div>
 </template>
 <script>
-  export default {}
+	import {mapGetters} from 'vuex'
+  export default {
+  	computed:{
+  		...mapGetters(['fileName'])
+  	}
+  }
 	document.addEventListener('DOMContentLoaded', () => {
 	  // 获取html元素
 	  const html = document.querySelector('html')
