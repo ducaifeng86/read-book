@@ -23,6 +23,7 @@
 			initEpub(){
 				const url = 'http://192.168.1.101:8001/epub/'+this.fileName+'.epub';
 				this.book = new Epub(url);
+				this.setCurrentBook(this.book);
 				this.rendition = this.book.renderTo('read',{
 					width:innerWidth,
 					height:innerHeight,

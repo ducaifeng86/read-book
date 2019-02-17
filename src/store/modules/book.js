@@ -3,7 +3,8 @@ const book = {
 		fileName:'',
 		menuVisible:false,
 		settingVisible: -1,
-		defaultFontSize:16
+		defaultFontSize:16,
+		currentBook:null
 	},
 	mutations:{
 		'SET_FILENAME':(state,fileName) => {
@@ -17,6 +18,9 @@ const book = {
     	},
     	'SET_DEFAULT_FONT_SIZE':(state,defaultFontSize) => {
     		state.defaultFontSize = defaultFontSize;
+    	},
+    	'SET_CURRENT_BOOK':(state,currentBook) => {
+    		state.currentBook = currentBook
     	}
 	}
 }

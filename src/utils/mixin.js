@@ -5,7 +5,8 @@ export const ebookMixin = {
 			'fileName',
 			'menuVisible',
 			'settingVisible',
-			'defaultFontSize'
+			'defaultFontSize',
+			'currentBook'
 		])
 	},
 	methods: {
@@ -13,7 +14,8 @@ export const ebookMixin = {
 			'setMenuVisible',
 			'setFileName',
 			'setSettingVisible',
-			'setDefaultFontSize'
+			'setDefaultFontSize',
+			'setCurrentBook'
 			])
 	}
 }
