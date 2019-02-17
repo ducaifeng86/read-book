@@ -46,6 +46,7 @@
 				this.currentBook.rendition.themes.fontSize(fontSize);
 			},
 			showFontFamilyPopup(){
+				this.setFontFamilyVisible(true);
 			}
 		}
 	}

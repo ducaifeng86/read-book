@@ -6,6 +6,7 @@ const book = {
 		defaultFontSize:16,
 		currentBook:null,
 		defaultFontFamily: 'Default',
+		fontFamilyVisible: false,
 	},
 	mutations:{
 		'SET_FILENAME':(state,fileName) => {
@@ -25,6 +26,9 @@ const book = {
     	},
     	'SET_DEFAULT_FONT_FAMILY': (state, font) => {
       		state.defaultFontFamily = font
+    	},
+    	'SET_FONT_FAMILY_VISIBLE': (state, visible) => {
+      		state.fontFamilyVisible = visible
     	},
 	}
 }
