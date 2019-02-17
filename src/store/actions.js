@@ -13,6 +13,9 @@ const actions = {
   	},
   	setCurrentBook:({commit},currentBook) => {
   		return commit('SET_CURRENT_BOOK',currentBook);
-  	}
+  	},
+  	setDefaultFontFamily: ({ commit }, font) => {
+    	return commit('SET_DEFAULT_FONT_FAMILY', font)
+  	},
 }
 export default actions
