@@ -1,7 +1,9 @@
 const book = {
 	state:{
 		fileName:'',
-		menuVisible:false
+		menuVisible:false,
+		settingVisible: -1,
+		defaultFontSize:16
 	},
 	mutations:{
 		'SET_FILENAME':(state,fileName) => {
@@ -9,7 +11,14 @@ const book = {
 		},
 		'SET_MENUVISIBLE':(state,menuVisible) => {
 			state.menuVisible = menuVisible;
-		}
+		},
+		'SET_SETTING_VISIBLE': (state, settingVisible) => {
+      		state.settingVisible = settingVisible;
+    	},
+    	'SET_DEFAULT_FONT_SIZE':(state,defaultFontSize) => {
+    		state.defaultFontSize = defaultFontSize;
+    	}
+    	
 	}
 }
 export default book

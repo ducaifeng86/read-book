@@ -15,10 +15,13 @@
 			this.setFileName(fileName).then(()=>{
 				this.initEpub()
 			});
+			/*this.setFileName(this.$route.params.fileName.split('|').join('/')).then(()=>{
+				this.initEpub()
+			});*/
 		},
 		methods:{
 			initEpub(){
-				const url = 'http://192.168.0.114:8000/epub/'+this.fileName+'.epub';
+				const url = 'http://192.168.1.101:8001/epub/'+this.fileName+'.epub';
 				this.book = new Epub(url);
 				this.rendition = this.book.renderTo('read',{
 					width:innerWidth,
@@ -57,10 +60,14 @@
 				}
 			},
 			toggleTitleAndMenu(){
+				if(this.menuVisible){
+					this.setSettingVisible(-1);	
+				}
 				this.setMenuVisible(!this.menuVisible);
 			},
 			hideTitleAndMenu(){
 				this.setMenuVisible(false);
+				this.setSettingVisible(-1);
 			}
 		}
 	}
