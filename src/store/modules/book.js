@@ -18,7 +18,6 @@ const book = {
     	'SET_DEFAULT_FONT_SIZE':(state,defaultFontSize) => {
     		state.defaultFontSize = defaultFontSize;
     	}
-    	
 	}
 }
 export default book
