@@ -21,7 +21,7 @@
 		},
 		methods:{
 			initEpub(){
-				const url = 'http://192.168.1.101:8001/epub/'+this.fileName+'.epub';
+				const url = 'http://192.168.0.114:8000/epub/'+this.fileName+'.epub';
 				this.book = new Epub(url);
 				this.setCurrentBook(this.book);
 				this.rendition = this.book.renderTo('read',{
@@ -62,13 +62,15 @@
 			},
 			toggleTitleAndMenu(){
 				if(this.menuVisible){
-					this.setSettingVisible(-1);	
+					this.setSettingVisible(-1);
+					this.setFontFamilyVisible(false);
 				}
 				this.setMenuVisible(!this.menuVisible);
 			},
 			hideTitleAndMenu(){
 				this.setMenuVisible(false);
 				this.setSettingVisible(-1);
+				this.setFontFamilyVisible(false);
 			}
 		}
 	}
