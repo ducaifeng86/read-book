@@ -48,7 +48,13 @@
 					event.stopPropagation();
 				});
 				this.rendition.hooks.content.register(contents => {
-					contents.addStylesheet("http://192.168.0.114:8000/fonts/cabin.css");
+					Promise.all([
+						contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/cabin.css`),
+						contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/daysOne.css`),
+						contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/montserrat.css`),
+						contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/tangerine.css`)
+					]).then(() => {
+					})
 				})
 			},
 			prevPage(){
