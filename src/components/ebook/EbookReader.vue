@@ -7,6 +7,7 @@
 <script>
 	import {ebookMixin} from '../../utils/mixin'
 	import {saveFontFamily,getFontFamily,saveFontSize,getFontSize,getTheme,saveTheme} from '../../utils/localStorage'
+	import {addCss} from '../../utils/book'
 	import Epub from 'epubjs'
 	global.epub = Epub
 	export default{
@@ -25,9 +26,9 @@
 				let defaultTheme = getTheme(this.fileName);
 				if(!defaultTheme){
 					defaultTheme = this.themeList[0].name;
-					this.setDefaultTheme(defaultTheme);
 					saveTheme(this.fileName,defaultTheme);
 				}
+				this.setDefaultTheme(defaultTheme);
 				this.themeList.forEach(theme=>{
 					this.rendition.themes.register(theme.name,theme.style)
 				});
@@ -59,6 +60,7 @@
 						this.currentBook.rendition.themes.font(font);
 						this.setDefaultFontFamily(font);
 					}
+					this.initGlobalStyle();
 				});
 				this.rendition.on('touchstart',event => {
 					this.touchStartX = event.changedTouches[0].clientX;
