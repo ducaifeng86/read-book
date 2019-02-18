@@ -6,7 +6,7 @@
 
 <script>
 	import {ebookMixin} from '../../utils/mixin'
-	import {saveFontFamily,getFontFamily,saveFontSize,getFontSize} from '../../utils/localStorage'
+	import {saveFontFamily,getFontFamily,saveFontSize,getFontSize,getTheme,saveTheme} from '../../utils/localStorage'
 	import Epub from 'epubjs'
 	global.epub = Epub
 	export default{
@@ -21,6 +21,18 @@
 			});*/
 		},
 		methods:{
+			initTheme(){
+				let defaultTheme = getTheme(this.fileName);
+				if(!defaultTheme){
+					defaultTheme = this.themeList[0].name;
+					this.setDefaultTheme(defaultTheme);
+					saveTheme(this.fileName,defaultTheme);
+				}
+				this.themeList.forEach(theme=>{
+					this.rendition.themes.register(theme.name,theme.style)
+				});
+				this.rendition.themes.select(this.defaultTheme);
+			},
 			initEpub(){
 				//const url = 'http://192.168.0.114:8000/epub/'+this.fileName+'.epub';
 				const url = 'http://192.168.1.101:8001/epub/'+this.fileName+'.epub';
@@ -32,6 +44,7 @@
 					method:'default'
 				})
 				this.rendition.display().then(()=>{
+					this.initTheme();
 					let fontSize = getFontSize(this.fileName);
 					if(!fontSize){
 						saveFontSize(this.fileName,this.defaultFontSize);

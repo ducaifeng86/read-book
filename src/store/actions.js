@@ -20,5 +20,8 @@ const actions = {
   	setFontFamilyVisible: ({ commit }, visible) => {
     	return commit('SET_FONT_FAMILY_VISIBLE', visible)
   	},
+  	setDefaultTheme: ({ commit }, theme) => {
+    	return commit('SET_DEFAULT_THEME', theme)
+  	},
 }
 export default actions
