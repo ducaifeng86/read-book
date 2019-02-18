@@ -47,6 +47,9 @@
 					event.preventDefault();
 					event.stopPropagation();
 				});
+				this.rendition.hooks.content.register(contents => {
+					contents.addStylesheet("http://192.168.0.114:8000/fonts/cabin.css");
+				})
 			},
 			prevPage(){
 				if(this.rendition){

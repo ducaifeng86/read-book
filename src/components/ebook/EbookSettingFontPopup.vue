@@ -38,6 +38,11 @@
 			},
 			setFontFamily(font){
 				this.setDefaultFontFamily(font);
+				if(font === 'Default'){
+					this.currentBook.rendition.themes.font("Times New Roman");
+				}else{
+					this.currentBook.rendition.themes.font(font);
+				}
 			}
 		}
 	}
