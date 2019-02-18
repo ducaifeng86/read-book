@@ -6,6 +6,7 @@
 
 <script>
 	import {ebookMixin} from '../../utils/mixin'
+	import {saveFontFamily,getFontFamily,saveFontSize,getFontSize} from '../../utils/localStorage'
 	import Epub from 'epubjs'
 	global.epub = Epub
 	export default{
@@ -29,7 +30,22 @@
 					height:innerHeight,
 					method:'default'
 				})
-				this.rendition.display();
+				this.rendition.display().then(()=>{
+					let fontSize = getFontSize(this.fileName);
+					if(!fontSize){
+						saveFontSize(this.fileName,this.defaultFontSize);
+					}else{
+						this.currentBook.rendition.themes.fontSize(fontSize);
+						this.setDefaultFontSize(fontSize);
+					}
+					let font = getFontFamily(this.fileName);
+					if(!font){
+						saveFontFamily(this.fileName,this.defaultFontFamily);
+					}else{
+						this.currentBook.rendition.themes.font(font);
+						this.setDefaultFontFamily(font);
+					}
+				});
 				this.rendition.on('touchstart',event => {
 					this.touchStartX = event.changedTouches[0].clientX;
 					this.touchStartTime = event.timeStamp;
@@ -49,10 +65,10 @@
 				});
 				this.rendition.hooks.content.register(contents => {
 					Promise.all([
-						contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/cabin.css`),
-						contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/daysOne.css`),
-						contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/montserrat.css`),
-						contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/tangerine.css`)
+						contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/fonts/cabin.css`),
+						contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/fonts/daysOne.css`),
+						contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/fonts/montserrat.css`),
+						contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/fonts/tangerine.css`)
 					]).then(() => {
 					})
 				})
