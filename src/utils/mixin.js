@@ -10,7 +10,9 @@ export const ebookMixin = {
 			'currentBook',
 			'defaultFontFamily',
 			'fontFamilyVisible',
-			'defaultTheme'
+			'defaultTheme',
+			'progress',
+			'bookAvailable',
 		]),
 		themeList(){
 				return themeList(this);
@@ -25,7 +27,9 @@ export const ebookMixin = {
 			'setCurrentBook',
 			'setDefaultFontFamily',
 			'setFontFamilyVisible',
-			'setDefaultTheme'
+			'setDefaultTheme',
+			'setProgress',
+			'setBookAvailable',
 		]),
 		initGlobalStyle(){
 			removeAllCss();
@@ -47,6 +51,12 @@ export const ebookMixin = {
 					break;
 			}
 				
-		}
+		},
+		displayProgress() {
+	      const cfi = this.currentBook.locations.cfiFromPercentage(this.progress / 100)
+	      this.currentBook.rendition.display(cfi).then(() => {
+	        this.refreshLocation()
+	      })
+    	},
 	}
 }
