@@ -7,7 +7,6 @@
 <script>
 	import {ebookMixin} from '../../utils/mixin'
 	import {saveFontFamily,getFontFamily,saveFontSize,getFontSize,getTheme,saveTheme} from '../../utils/localStorage'
-	import {addCss} from '../../utils/book'
 	import Epub from 'epubjs'
 	global.epub = Epub
 	export default{
@@ -35,8 +34,8 @@
 				this.rendition.themes.select(this.defaultTheme);
 			},
 			initEpub(){
-				//const url = 'http://192.168.0.114:8000/epub/'+this.fileName+'.epub';
-				const url = 'http://192.168.1.101:8001/epub/'+this.fileName+'.epub';
+				const url = 'http://192.168.0.114:8000/epub/'+this.fileName+'.epub';
+				//const url = 'http://192.168.1.101:8001/epub/'+this.fileName+'.epub';
 				this.book = new Epub(url);
 				this.setCurrentBook(this.book);
 				this.rendition = this.book.renderTo('read',{
