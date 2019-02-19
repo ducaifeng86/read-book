@@ -1,5 +1,6 @@
 import { mapGetters, mapActions } from 'vuex'
 import {themeList,addCss,removeAllCss} from './book'
+import {saveLocation} from './localStorage'
 export const ebookMixin = {
 	computed: {
 		...mapGetters([
@@ -60,5 +61,25 @@ export const ebookMixin = {
 	        this.refreshLocation()
 	      })
     	},
+    	refreshLocation(){
+			const currentLocation = this.currentBook.rendition.currentLocation();
+			const startCfi = this.currentLocation.start.cfi;
+			const progress = this.currentBook.locations.percentageFromCfi(startCfi);
+			this.setProgress(Math.floor(progress*100));
+			saveLocation(this.fileName,startCfi);
+		},
+		display(target,cb){
+			if(target){
+				this.rendition.display(target).then(()=>{
+					this.refreshLocation();
+					if(cb) cb();
+				});
+			}else{
+				this.rendition.display().then(()=>{
+					this.refreshLocation();
+					if(cb) cb();
+				});
+			}
+		},
 	}
 }

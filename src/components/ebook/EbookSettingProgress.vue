@@ -41,7 +41,7 @@
 				if(this.section){
 					const sectionInfo = this.currentBook.section(this.section);
 					if(sectionInfo && sectionInfo.href){
-						return this.currentBook.Navigator.get(sectionInfo.href).label;
+						return this.currentBook.navigation.get(sectionInfo.href).label;
 					}
 				}
 			}
@@ -83,11 +83,6 @@
 						this.refreshLocation();
 					});
 				}
-			},
-			refreshLocation(){
-				const currentLocation = this.currentBook.rendition.currentLocation();
-				const progress = this.currentBook.locations.percentageFromCfi(currentLocation.start.cfi);
-				this.setProgress(Math.floor(progress*100));
 			}
 		},
 		updated(){

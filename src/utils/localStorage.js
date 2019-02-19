@@ -58,3 +58,11 @@ export function getTheme(fileName) {
 export function saveTheme(fileName, theme) {
   setBookObject(fileName, 'theme', theme)
 }
+
+export function getLocation(fileName) {
+  return getBookObject(fileName, 'location')
+}
+
+export function saveLocation(fileName, location) {
+  setBookObject(fileName, 'location', location)
+}

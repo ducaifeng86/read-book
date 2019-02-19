@@ -54,12 +54,13 @@
 					height:innerHeight,
 					method:'default'
 				})
-				this.rendition.display().then(()=>{
+				const location = getLocation(this.fileName);
+				this.display(location,()=>{
 					this.initTheme();
 					this.initFontSize();
 					this.initFontFamily();
 					this.initGlobalStyle();
-				});
+				})
 				this.rendition.hooks.content.register(contents => {
 					Promise.all([
 						contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/fonts/cabin.css`),
@@ -90,8 +91,8 @@
 				});
 			},
 			initEpub(){
-				const url = 'http://192.168.0.114:8000/epub/'+this.fileName+'.epub';
-				//const url = 'http://192.168.1.101:8001/epub/'+this.fileName+'.epub';
+				//const url = 'http://192.168.0.114:8000/epub/'+this.fileName+'.epub';
+				const url = 'http://192.168.1.101:8001/epub/'+this.fileName+'.epub';
 				this.book = new Epub(url);
 				this.setCurrentBook(this.book);
 				this.initRendition();
@@ -104,13 +105,17 @@
 			},
 			prevPage(){
 				if(this.rendition){
-					this.rendition.prev();
+					this.rendition.prev().then(()=>{
+						this.refreshLocation()
+					});
 					this.hideTitleAndMenu();
 				}
 			},
 			nextPage(){
 				if(this.rendition){
-					this.rendition.next();
+					this.rendition.next().then(()=>{
+						this.refreshLocation()
+					});
 					this.hideTitleAndMenu();
 				}
 			},
