@@ -29,5 +29,8 @@ const actions = {
   	setBookAvailable: ({ commit }, bookAvailable) => {
     	return commit('SET_BOOK_AVAILABLE', bookAvailable)
   	},
+  	setSection: ({ commit }, section) => {
+    	return commit('SET_SECTION', section)
+  	},
 }
 export default actions
