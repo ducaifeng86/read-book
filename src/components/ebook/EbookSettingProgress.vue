@@ -38,14 +38,24 @@
 		methods:{
 			onProgressChange(progress){
 				this.setProgress(progress).then(()=>{
-					this.displayProgress()
+					this.displayProgress();
+					this.updateProgressBg();
 				})
 			},
 			onProgressInput(progress){
-				console.log("dd");
+				this.setProgress(progress).then(()=>{
+					this.displayProgress();
+					this.updateProgressBg();
+				})
+			},
+			updateProgressBg(){
+				this.$refs.progress.style.backgroundSize = `${this.progress}% 100%`;
 			},
 			prevSection(){},
 			nextSection(){},
+		},
+		updated(){
+			this.updateProgressBg();
 		}
 	}
 </script>
@@ -84,8 +94,6 @@
           width: 100%;
           -webkit-appearance: none;
           height: px2rem(2);
-          background: -webkit-linear-gradient(#5d6268, #5d6268) no-repeat, #b4b5b7;
-          background-size: 0 100% !important;
           margin: 0 px2rem(10);
           z-index: 2;
           &:focus {
