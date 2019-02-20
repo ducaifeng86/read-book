@@ -59,6 +59,10 @@
 					this.updateProgressBg();
 				})
 			},
+			displayProgress() {
+		      	const cfi = this.currentBook.locations.cfiFromPercentage(this.progress / 100)
+		      	this.display(cfi);
+    		},
 			updateProgressBg(){
 				this.$refs.progress.style.backgroundSize = `${this.progress}% 100%`;
 			},
@@ -79,16 +83,9 @@
 			displaySection(){
 				const sectionInfo = this.currentBook.section(this.section);
 				if(sectionInfo && sectionInfo.href){
-					this.currentBook.rendition.display(sectionInfo.href).then(()=>{
-						this.refreshLocation();
-					});
+					this.display(sectionInfo.href);
 				}
 			},
-			refreshLocation(){
-				const currentLocation = this.currentBook.rendition.currentLocation();
-				const progress = this.currentBook.locations.percentageFromCfi(currentLocation.start.cfi);
-				this.setProgress(Math.floor(progress*100));
-			}
 		},
 		updated(){
 			this.updateProgressBg();

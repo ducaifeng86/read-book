@@ -6,7 +6,7 @@
 
 <script>
 	import {ebookMixin} from '../../utils/mixin'
-	import {saveFontFamily,getFontFamily,saveFontSize,getFontSize,getTheme,saveTheme} from '../../utils/localStorage'
+	import {saveFontFamily,getFontFamily,saveFontSize,getFontSize,getTheme,saveTheme,getLocation} from '../../utils/localStorage'
 	import Epub from 'epubjs'
 	global.epub = Epub
 	export default{
@@ -54,7 +54,8 @@
 					height:innerHeight,
 					method:'default'
 				})
-				this.rendition.display().then(()=>{
+				const location = getLocation(this.fileName);
+				this.display(location,()=>{
 					this.initTheme();
 					this.initFontSize();
 					this.initFontFamily();
@@ -99,18 +100,23 @@
 				this.book.ready.then(()=>{
 					return this.book.locations.generate(750*(window.innerWidth/375)*getFontSize(this.fileName)/16)
 				}).then(location=>{
+					this.refreshLocation();
 					this.setBookAvailable(true);
 				})
 			},
 			prevPage(){
 				if(this.rendition){
-					this.rendition.prev();
+					this.rendition.prev().then(()=>{
+						this.refreshLocation();
+					});
 					this.hideTitleAndMenu();
 				}
 			},
 			nextPage(){
 				if(this.rendition){
-					this.rendition.next();
+					this.rendition.next().then(()=>{
+						this.refreshLocation();
+					});
 					this.hideTitleAndMenu();
 				}
 			},
