@@ -60,7 +60,7 @@
 					this.initFontSize();
 					this.initFontFamily();
 					this.initGlobalStyle();
-				});
+				})
 				this.rendition.hooks.content.register(contents => {
 					Promise.all([
 						contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/fonts/cabin.css`),
