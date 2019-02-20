@@ -20,6 +20,7 @@
 	    <ebook-setting-font-popup></ebook-setting-font-popup>
 	    <ebook-setting-theme></ebook-setting-theme>
 	    <ebook-setting-progress></ebook-setting-progress>
+	    <ebook-slide></ebook-slide>
 	</div>
 </template>
 
@@ -28,13 +29,15 @@
 	import EbookSettingFontPopup from './EbookSettingFontPopup'
 	import EbookSettingTheme from './EbookSettingTheme'
 	import EbookSettingProgress from './EbookSettingProgress'
+	import EbookSlide from './EbookSlide'
 	import {ebookMixin} from '../../utils/mixin'
 	export default{
 		components:{
 			EbookSettingFont,
 			EbookSettingFontPopup,
 			EbookSettingTheme,
-			EbookSettingProgress
+			EbookSettingProgress,
+			EbookSlide
 		},
 		mixins:[ebookMixin],
 		methods:{
