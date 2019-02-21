@@ -35,5 +35,8 @@ const actions = {
   	setCover: ({ commit }, cover) => {
     	return commit('SET_COVER', cover)
   	},
+  	setMetadata: ({ commit }, metadata) => {
+    	return commit('SET_METADATA', metadata)
+  	},
 }
 export default actions

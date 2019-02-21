@@ -16,6 +16,7 @@ export const ebookMixin = {
 			'bookAvailable',
 			'section',
 			'cover',
+			'metadata',
 		]),
 		themeList(){
 				return themeList(this);
@@ -35,6 +36,7 @@ export const ebookMixin = {
 			'setBookAvailable',
 			'setSection',
 			'setCover',
+			'setMetadata',
 		]),
 		initGlobalStyle(){
 			removeAllCss();

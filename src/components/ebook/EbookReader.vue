@@ -90,6 +90,16 @@
 					event.stopPropagation();
 				});
 			},
+			parseBook(){
+				this.book.loaded.cover.then(cover=>{
+					this.book.archive.createUrl(cover).then(url=>{
+						this.setCover(url)
+					})
+				})
+				this.book.loaded.metadata.then(metadata=>{
+					this.setMetadata(metadata)
+				})
+			},
 			initEpub(){
 				const url = 'http://192.168.0.114:8000/epub/'+this.fileName+'.epub';
 				//const url = 'http://192.168.1.101:8001/epub/'+this.fileName+'.epub';
@@ -97,6 +107,7 @@
 				this.setCurrentBook(this.book);
 				this.initRendition();
 				this.initGesture();
+				this.parseBook();
 				this.book.ready.then(()=>{
 					return this.book.locations.generate(750*(window.innerWidth/375)*getFontSize(this.fileName)/16)
 				}).then(location=>{

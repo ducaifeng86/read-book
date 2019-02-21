@@ -11,5 +11,6 @@ const book = {
 	bookAvailable: state => state.book.bookAvailable,
 	section: state => state.book.section,
 	cover: state => state.book.cover,
+	metadata: state => state.book.metadata,
 }
 export default book
