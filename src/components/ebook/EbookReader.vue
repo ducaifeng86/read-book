@@ -6,6 +6,7 @@
 
 <script>
 	import {ebookMixin} from '../../utils/mixin'
+	import {flatten} from '../../utils/book'
 	import {saveFontFamily,getFontFamily,saveFontSize,getFontSize,getTheme,saveTheme,getLocation} from '../../utils/localStorage'
 	import Epub from 'epubjs'
 	global.epub = Epub
@@ -99,10 +100,19 @@
 				this.book.loaded.metadata.then(metadata=>{
 					this.setMetadata(metadata)
 				})
+				this.book.loaded.navigation.then(nav=>{
+					const navItem = flatten(nav.toc);
+					function find(item,level = 0){
+						return !item.parent?level:find(navItem.filter(parentItem=>parentItem.id === item.parent)[0],++level)
+					}
+					navItem.forEach(item=>{
+						item.level = find(item)
+					})
+				})
 			},
 			initEpub(){
-				const url = 'http://192.168.0.114:8000/epub/'+this.fileName+'.epub';
-				//const url = 'http://192.168.1.101:8001/epub/'+this.fileName+'.epub';
+				//const url = 'http://192.168.0.114:8000/epub/'+this.fileName+'.epub';
+				const url = 'http://192.168.1.101:8001/epub/'+this.fileName+'.epub';
 				this.book = new Epub(url);
 				this.setCurrentBook(this.book);
 				this.initRendition();
