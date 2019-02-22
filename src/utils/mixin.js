@@ -17,6 +17,7 @@ export const ebookMixin = {
 			'section',
 			'cover',
 			'metadata',
+			'navigation',
 		]),
 		themeList(){
 				return themeList(this);
@@ -37,6 +38,7 @@ export const ebookMixin = {
 			'setSection',
 			'setCover',
 			'setMetadata',
+			'setNavigation',
 		]),
 		initGlobalStyle(){
 			removeAllCss();
@@ -67,10 +69,13 @@ export const ebookMixin = {
     	},*/
     	refreshLocation(){
 			const currentLocation = this.currentBook.rendition.currentLocation();
-			const startCfi = currentLocation.start.cfi;
-			const progress = this.currentBook.locations.percentageFromCfi(startCfi);
-			this.setProgress(Math.floor(progress*100));
-			this.setSection(currentLocation.start.index);
+			if(currentLocation && currentLocation.start){
+				const startCfi = currentLocation.start.cfi;
+				const progress = this.currentBook.locations.percentageFromCfi(startCfi);
+				this.setProgress(Math.floor(progress*100));
+				this.setSection(currentLocation.start.index);
+				saveLocation(this.fileName,startCfi);
+			}
     	},
 		display(target,cb){
 			if(target){

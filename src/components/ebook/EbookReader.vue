@@ -108,11 +108,12 @@
 					navItem.forEach(item=>{
 						item.level = find(item)
 					})
+					this.setNavigation(navItem);
 				})
 			},
 			initEpub(){
-				//const url = 'http://192.168.0.114:8000/epub/'+this.fileName+'.epub';
-				const url = 'http://192.168.1.101:8001/epub/'+this.fileName+'.epub';
+				const url = 'http://192.168.0.114:8000/epub/'+this.fileName+'.epub';
+				//const url = 'http://192.168.1.101:8001/epub/'+this.fileName+'.epub';
 				this.book = new Epub(url);
 				this.setCurrentBook(this.book);
 				this.initRendition();

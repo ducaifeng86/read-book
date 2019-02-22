@@ -13,6 +13,7 @@ const book = {
 		section: 0,
 		cover: null,
 		metadata: null,
+		navigation: null,
 
 	},
 	mutations:{
@@ -54,6 +55,9 @@ const book = {
     	},
     	'SET_METADATA': (state, metadata) => {
       		state.metadata = metadata
+    	},
+    	'SET_NAVIGATION': (state, navigation) => {
+      		state.navigation = navigation
     	},
 	}
 }
