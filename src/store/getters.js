@@ -13,5 +13,6 @@ const book = {
 	cover: state => state.book.cover,
 	metadata: state => state.book.metadata,
 	navigation: state => state.book.navigation,
+	offsetY: state => state.book.offsetY,
 }
 export default book
