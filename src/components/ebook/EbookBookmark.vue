@@ -1,5 +1,5 @@
 <template>
-	<div class="ebook-bookmark">
+	<div class="ebook-bookmark" ref="bookmark">
 		<div class="ebook-bookmark-text-wrapper">
 			<div class="ebook-bookmark-down-wrapper">
 				<span class="icon-down"></span>
@@ -7,19 +7,29 @@
 			<div class="ebook-bookmark-text">{{text}}</div>
 		</div>
 		<div class="ebook-bookmark-icon-wrapper">
-			<bookmark :color="'red'" :width="15" :height="35"></bookmark>
+			<bookmark :color="color" :width="15" :height="35"></bookmark>
 		</div>
 	</div>
 </template>
 
 <script>
+	import {realPx} from '../utils/utils'
 	import Bookmark from '../common/Bookmark'
 	const BLUE = '#346cbc'
 	const WHITE = '#fff'
 	export default{
 		data(){
 			return {
-				text:this.$t('book.pulldownAddMark')
+				text:'',
+				color:WHITE
+			}
+		},
+		computed:{
+			height(){
+				return realPx(35)
+			},
+			threshold(){
+				return realPx(55)
 			}
 		},
 		components:{
