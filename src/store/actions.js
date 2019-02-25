@@ -45,7 +45,13 @@ const actions = {
     	return commit('SET_OFFSETY', offsetY)
   	},
   	setIsBookmark:({ commit }, isBookmark) => {
-   	 return commit('SET_IS_BOOKMARK', isBookmark)
+   	 	return commit('SET_IS_BOOKMARK', isBookmark)
+  	},
+  	setPagelist: ({ commit }, pagelist) => {
+    	return commit('SET_PAGELIST', pagelist)
+  	},
+  	setPaginate: ({ commit }, paginate) => {
+    	return commit('SET_PAGINATE', paginate)
   	},
 }
 export default actions

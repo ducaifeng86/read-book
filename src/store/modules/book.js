@@ -16,6 +16,8 @@ const book = {
 		navigation: null,
 		offsetY: 0,
 		isBookmark: null,
+		pagelist: null,
+		paginate: '',
 	},
 	mutations:{
 		'SET_FILENAME':(state,fileName) => {
@@ -65,6 +67,12 @@ const book = {
     	},
     	'SET_IS_BOOKMARK': (state, isBookmark) => {
       		state.isBookmark = isBookmark
+    	},
+    	'SET_PAGELIST': (state, pagelist) => {
+      		state.pagelist = pagelist
+    	},
+    	'SET_PAGINATE': (state, paginate) => {
+      		state.paginate = paginate
     	},
 	}
 }

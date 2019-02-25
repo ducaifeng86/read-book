@@ -15,5 +15,7 @@ const book = {
 	navigation: state => state.book.navigation,
 	offsetY: state => state.book.offsetY,
 	isBookmark: state => state.book.isBookmark,
+	pagelist: state => state.book.pagelist,
+	paginate: state => state.book.paginate,
 }
 export default book

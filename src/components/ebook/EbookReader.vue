@@ -193,9 +193,33 @@
 				this.parseBook();
 				this.book.ready.then(()=>{
 					return this.book.locations.generate(750*(window.innerWidth/375)*getFontSize(this.fileName)/16)
-				}).then(location=>{
-					this.refreshLocation();
+				}).then( locations =>{
+					this.navigation.forEach(nav =>{
+						nav.pageList = []
+					});
+					locations.forEach(item => {
+						const loc = item.match(/\[(.*)]\!/)[1];
+						this.navigation.forEach(nav =>{
+							if(nav.href){
+								const href = nav.href.match(/^(.*)\.html$/)[1];
+								if(href === loc){
+									nav.pageList.push(item);
+								}
+							}
+						})
+						let currentPage = 1;
+						this.navigation.forEach((nav,index) =>{
+							if(index === 0){
+								nav.page = 1;
+							}else{
+								nav.page = currentPage;
+							}
+							currentPage+= nav.pageList.length + 1;
+						})
+					})
+					this.setPagelist(locations);
 					this.setBookAvailable(true);
+					this.refreshLocation();
 				})
 			},
 			prevPage(){
