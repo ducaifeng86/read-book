@@ -13,11 +13,13 @@
 </template>
 
 <script>
-	import {realPx} from '../utils/utils'
+	import {realPx} from '../../utils/utils'
 	import Bookmark from '../common/Bookmark'
+	import {ebookMixin} from '../../utils/mixin'
 	const BLUE = '#346cbc'
 	const WHITE = '#fff'
 	export default{
+		mixins:[ebookMixin],
 		data(){
 			return {
 				text:'',
@@ -37,7 +39,15 @@
 		},
 		watch:{
 			offsetY(v){
-				
+				if(v >= this.height && v<this.threshold){
+					this.$refs.bookmark.style.top = `${-v}px`;
+					this.text = this.$t('book.pulldownAddMark');
+					this.color = WHITE;
+				}else if(v >= this.threshold){
+					this.$refs.bookmark.style.top = `${-v}px`;
+					this.text = this.$t('book.releaseAddMark');
+					this.color = BLUE;
+				}
 			}
 		}
 	}
