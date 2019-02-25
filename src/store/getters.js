@@ -14,5 +14,6 @@ const book = {
 	metadata: state => state.book.metadata,
 	navigation: state => state.book.navigation,
 	offsetY: state => state.book.offsetY,
+	isBookmark: state => state.book.isBookmark,
 }
 export default book

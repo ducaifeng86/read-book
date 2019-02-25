@@ -1,12 +1,12 @@
 <template>
 	<div class="ebook-bookmark" ref="bookmark">
 		<div class="ebook-bookmark-text-wrapper">
-			<div class="ebook-bookmark-down-wrapper">
+			<div class="ebook-bookmark-down-wrapper" ref="iconDown">
 				<span class="icon-down"></span>
 			</div>
 			<div class="ebook-bookmark-text">{{text}}</div>
 		</div>
-		<div class="ebook-bookmark-icon-wrapper">
+		<div class="ebook-bookmark-icon-wrapper" :style="isFixed ? fixedStyle : {}">
 			<bookmark :color="color" :width="15" :height="35"></bookmark>
 		</div>
 	</div>
@@ -23,7 +23,8 @@
 		data(){
 			return {
 				text:'',
-				color:WHITE
+				color:WHITE,
+				isFixed:false
 			}
 		},
 		computed:{
@@ -32,6 +33,13 @@
 			},
 			threshold(){
 				return realPx(55)
+			},
+			fixedStyle(){
+				return {
+					position:'fixed',
+					top:0,
+					right:`${(window.innerWidth - this.$refs.bookmark.clientWidth)/2}px`
+				}
 			}
 		},
 		components:{
@@ -39,15 +47,71 @@
 		},
 		watch:{
 			offsetY(v){
+				if(!this.bookAvailable || this.menuVisible || this.settingVisible >= 0){
+					return 
+				}
 				if(v >= this.height && v<this.threshold){
-					this.$refs.bookmark.style.top = `${-v}px`;
-					this.text = this.$t('book.pulldownAddMark');
-					this.color = WHITE;
+					this.beforeThreshold(v);
 				}else if(v >= this.threshold){
-					this.$refs.bookmark.style.top = `${-v}px`;
+					this.afterThreshold(v);
+				}else if(v > 0 && v < this.height){
+					this.beforeHeight();
+				}else if(v === 0){
+					this.restore();
+				}
+			}
+		},
+		methods:{
+			addBookmark(){},
+			removeBookmark(){},
+			restore(){//状态4
+				setTimeout(()=>{
+					this.$refs.bookmark.style.top = `${-this.height}px`;
+					this.$refs.iconDown.style.transform = 'rotate(0deg)';
+				},200);
+				if(this.isFixed){
+					this.setIsBookmark(true);
+					this.addBookmark();
+				}else{
+					this.setIsBookmark(false);
+					this.removeBookmark();
+				}
+			},
+			beforeHeight(){//状态1
+				if(this.isBookmark){
+					this.text = this.$t('book.pulldownDeleteMark');
+					this.color = WHITE;
+					this.isFixed = true;
+					}else{
+					this.text = this.$t('book.pulldownAddMark');
+					this.color = BLUE;
+					this.isFixed = false;
+				}
+			},
+			beforeThreshold(v){//状态2
+				this.$refs.bookmark.style.top = `${-v}px`;
+				this.beforeHeight();
+				const iconDown = this.$refs.iconDown;
+				if(iconDown.style.transform === 'rotate(180deg)'){
+					iconDown.style.transform = 'rotate(0deg)';
+				}
+			},
+			afterThreshold(v){//状态3
+				this.$refs.bookmark.style.top = `${-v}px`;
+				if(this.isBookmark){
+					this.text = this.$t('book.releaseDeleteMark');
+					this.color = WHITE;
+					this.isFixed = false;
+				}else{
 					this.text = this.$t('book.releaseAddMark');
 					this.color = BLUE;
+					this.isFixed = true;
 				}
+				const iconDown = this.$refs.iconDown;
+				if(iconDown.style.transform === '' || iconDown.style.transform === 'rotate(0deg)'){
+					iconDown.style.transform = 'rotate(180deg)';
+				}
+				
 			}
 		}
 	}

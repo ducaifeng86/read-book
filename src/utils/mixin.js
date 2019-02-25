@@ -19,6 +19,7 @@ export const ebookMixin = {
 			'metadata',
 			'navigation',
 			'offsetY',
+			'isBookmark',
 		]),
 		themeList(){
 				return themeList(this);
@@ -41,6 +42,7 @@ export const ebookMixin = {
 			'setMetadata',
 			'setNavigation',
 		 	'setOffsetY',
+	 	    'setIsBookmark',
 		]),
 		initGlobalStyle(){
 			removeAllCss();
